@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Chúc Mừng Sinh Nhật</title>
     <!-- Thư viện tạo pháo hoa -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
@@ -19,6 +19,11 @@
             --gold: #ffb703;
         }
 
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body, html {
             margin: 0;
             padding: 0;
@@ -28,6 +33,7 @@
             background: linear-gradient(135deg, #ffe5ec 0%, #ffcad4 100%);
             color: var(--text-dark);
             font-family: 'Quicksand', sans-serif;
+            touch-action: manipulation;
         }
 
         /* Hiệu ứng bong bóng bay nền */
@@ -59,13 +65,13 @@
 
         @keyframes tail {
             0% { width: 0; }
-            30% { width: 100px; }
+            30% { width: 60px; }
             100% { width: 0; }
         }
 
         @keyframes shooting {
             0% { transform: translateX(0) translateY(0) rotate(45deg); }
-            100% { transform: translateX(120vw) translateY(120vh) rotate(45deg); }
+            100% { transform: translateX(100vw) translateY(100vh) rotate(45deg); }
         }
 
         .container {
@@ -86,37 +92,36 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 15px;
-            box-sizing: border-box;
+            padding: 20px;
         }
 
         .active {
             display: flex;
-            animation: fadeIn 1.2s ease-out forwards;
+            animation: fadeIn 0.8s ease-out forwards;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
+            from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-size: clamp(1.5rem, 8vw, 2.2rem);
             margin-bottom: 15px;
             color: var(--text-dark);
             text-shadow: 2px 2px 8px rgba(255, 77, 109, 0.2);
         }
 
         p {
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
             line-height: 1.5;
             max-width: 500px;
             color: var(--text-dark);
         }
 
         .btn {
-            padding: 12px 30px;
-            font-size: 1rem;
+            padding: 12px 25px;
+            font-size: clamp(0.9rem, 4vw, 1rem);
             background: var(--primary);
             color: white;
             border: none;
@@ -131,9 +136,8 @@
             text-transform: uppercase;
         }
 
-        .btn:hover {
-            transform: scale(1.05);
-            background: var(--secondary);
+        .btn:active {
+            transform: scale(0.95);
         }
 
         canvas {
@@ -145,44 +149,28 @@
 
         #btn-run {
             position: absolute;
-            transition: all 0.1s ease;
+            transition: all 0.2s ease-out;
+            white-space: nowrap;
         }
 
         /* --- STYLES CHO TẤM THIỆP (CARD) --- */
         .birthday-card {
             background-color: #fff;
-            width: 95%;
-            max-width: 400px; /* Thu nhỏ chiều rộng tối đa */
-            max-height: 85vh; /* Đảm bảo không vượt quá màn hình */
-            padding: 25px;
+            width: 100%;
+            max-width: 380px;
+            max-height: 90vh;
+            padding: clamp(15px, 5vw, 25px);
             border-radius: 20px;
             box-shadow: 0 15px 40px rgba(128, 15, 47, 0.15);
             position: relative;
             transform: translateY(20px);
             opacity: 0;
-            animation: slideUpCard 1s 0.5s forwards;
+            animation: slideUpCard 0.8s 0.3s forwards;
             background-image: radial-gradient(#ffccd5 1px, transparent 1px);
             background-size: 15px 15px;
             border: 4px solid #fff;
-            overflow-y: auto; /* Cho phép cuộn nếu nội dung quá dài trên màn hình cực nhỏ */
-        }
-
-        .birthday-card::after {
-            content: '❤️';
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            font-size: 30px;
-            transform: rotate(15deg);
-        }
-
-        .birthday-card::before {
-            content: '';
-            position: absolute;
-            top: 8px; left: 8px; right: 8px; bottom: 8px;
-            border: 1.5px dashed #ffb3c1;
-            border-radius: 15px;
-            pointer-events: none;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         @keyframes slideUpCard {
@@ -191,7 +179,7 @@
 
         .wish-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
+            font-size: clamp(1.8rem, 7vw, 2.2rem);
             color: #ff4d6d;
             margin: 0 0 10px 0;
         }
@@ -199,32 +187,31 @@
         .wish-text {
             white-space: pre-line;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 4.5vw, 1.3rem);
             line-height: 1.4;
             color: #590d22;
             text-align: center;
+            margin-bottom: 10px;
         }
 
         .from-signature {
-            margin-top: 15px;
+            margin-top: 10px;
             text-align: right;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.5rem;
+            font-size: clamp(1.3rem, 5vw, 1.5rem);
             color: #ff4d6d;
-            padding-right: 15px;
+            padding-right: 10px;
             font-weight: bold;
         }
 
-        /* Ẩn thanh cuộn nhưng vẫn cuộn được */
+        /* Ẩn thanh cuộn */
         .birthday-card::-webkit-scrollbar {
             display: none;
         }
 
-        @media (max-width: 600px) {
-            .birthday-card { padding: 20px; width: 90%; }
-            .wish-text { font-size: 1.2rem; }
-            .wish-title { font-size: 1.8rem; }
-            h1 { font-size: 1.8rem; }
+        #btn-to-4 {
+            position: absolute;
+            bottom: 20%;
         }
     </style>
 </head>
@@ -238,20 +225,20 @@
         <div id="step1" class="section active">
             <h1 id="mystery-title"></h1>
             <p id="mystery-desc"></p>
-            <button class="btn" onclick="startStage2()">Bắt đầu hành trình 🌸</button>
+            <button class="btn" onclick="startStage2()">Khám phá ngay 🌸</button>
         </div>
 
         <!-- Giai đoạn 2 & 3 -->
         <div id="step2-3" class="section">
             <canvas id="particleCanvas"></canvas>
-            <button id="btn-to-4" class="btn" style="display:none; position:relative; top: 220px;" onclick="startStage4()">Nhận điều bất ngờ ✨</button>
+            <button id="btn-to-4" class="btn" style="display:none;" onclick="startStage4()">Nhận điều bất ngờ ✨</button>
         </div>
 
         <!-- Giai đoạn 4 -->
         <div id="step4" class="section">
-            <h1>Thử thách bắt quà!</h1>
-            <p>Phải nhanh tay chạm vào hộp quà đang trốn chạy nhé!</p>
-            <button id="btn-run" class="btn" onmouseover="runAway()" onclick="startStage5()">🎁 Nhận Quà</button>
+            <h1>Bắt lấy món quà!</h1>
+            <p>Hộp quà này hơi nhút nhát, hãy thử chạm vào nó nhé!</p>
+            <button id="btn-run" class="btn" onmouseover="runAway()" ontouchstart="runAway(event)" onclick="startStage5()">🎁 Nhận Quà</button>
         </div>
 
         <!-- Giai đoạn 5 -->
@@ -263,28 +250,33 @@ Hôm nay là một ngày rất khác,
 Có nắng nhiều hơn ở trên vai.
 Bởi đâu đó giữa dòng người tấp nập,
 Có một người vừa thêm tuổi mới, rất hay.
+
 Chúc bạn bước sang năm mới ấy,
 Nhẹ nhàng thôi, nhưng đủ ấm êm.
 Buồn ghé đến thì mong là ít,
 Còn niềm vui thì ở cạnh bên.
+
 Chúc bạn luôn là người hạnh phúc,
 Giữ nụ cười như vốn vẫn quen.
 Dẫu đời có đôi lần chênh vênh quá,
 Vẫn tin rằng ngày mai sẽ dịu hiền.
                 </div>
-                <div class="from-signature">From: Võ Hồng Quyền with love ❤️</div>
-                <button class="btn" style="margin-top: 15px; width: 100%;" onclick="celebrate()">Thổi nến & Nhận pháo hoa! 🎉</button>
+                <div class="from-signature">From: Võ Hồng Quyền ❤️</div>
+                <button class="btn" style="margin-top: 15px; width: 100%;" onclick="celebrate()">Thổi nến & Pháo hoa! 🎉</button>
             </div>
         </div>
     </div>
 
     <script>
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
         // --- Hiệu ứng Trang Trí ---
         function initDecorations() {
             const starContainer = document.getElementById('stars-container');
             const bubbleContainer = document.getElementById('bubbles-container');
+            const count = isMobile ? 8 : 15;
             
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < count; i++) {
                 const star = document.createElement('div');
                 star.className = 'shooting-star';
                 star.style.left = Math.random() * 100 + 'vw';
@@ -293,10 +285,10 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
                 starContainer.appendChild(star);
             }
 
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < count; i++) {
                 const bubble = document.createElement('div');
                 bubble.className = 'bubble';
-                const size = Math.random() * 30 + 10 + 'px';
+                const size = Math.random() * (isMobile ? 20 : 30) + 10 + 'px';
                 bubble.style.width = size;
                 bubble.style.height = size;
                 bubble.style.left = Math.random() * 100 + 'vw';
@@ -306,9 +298,9 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
         }
         initDecorations();
 
-        // --- Typing Effect ---
+        // --- Hiệu ứng Đánh máy ---
         const titleText = "Gửi cậu...";
-        const descText = "Tớ đã chuẩn bị một món quà đặc biệt dành riêng cho ngày hôm nay. Hãy cùng khám phá bí mật này nhé!";
+        const descText = "Tớ có một món quà nhỏ cho ngày hôm nay. Cùng khám phá nhé!";
         let i = 0, j = 0;
 
         function typeTitle() {
@@ -350,9 +342,9 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
                 this.targetX = targetX;
                 this.targetY = targetY;
                 this.color = color;
-                this.size = Math.random() * 1.5 + 1.2;
+                this.size = Math.random() * 1.5 + (isMobile ? 1 : 1.2);
                 this.baseSize = this.size;
-                this.velocity = 0.05;
+                this.velocity = isMobile ? 0.07 : 0.05;
                 this.offset = Math.random() * 100;
             }
             update() {
@@ -374,14 +366,15 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
         function getPointsFromText(text) {
             ctx.clearRect(0,0, canvas.width, canvas.height);
             ctx.fillStyle = "black";
-            ctx.font = "bold 50px Quicksand";
+            ctx.font = `bold ${isMobile ? '35px' : '50px'} Quicksand`;
             ctx.textAlign = "center";
             ctx.fillText(text, canvas.width/2, canvas.height/2);
             
             const imageData = ctx.getImageData(0,0, canvas.width, canvas.height);
             const points = [];
-            for(let y=0; y<canvas.height; y+=5) {
-                for(let x=0; x<canvas.width; x+=5) {
+            const step = isMobile ? 6 : 5;
+            for(let y=0; y<canvas.height; y+=step) {
+                for(let x=0; x<canvas.width; x+=step) {
                     if(imageData.data[(y*canvas.width + x)*4 + 3] > 128) {
                         points.push({x, y});
                     }
@@ -393,37 +386,31 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
         function getPointsFromCake() {
             const points = [];
             const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2 + 80;
+            const centerY = canvas.height / 2 + (isMobile ? 50 : 80);
+            const scale = isMobile ? 0.7 : 1;
 
             function addTier(yBase, width, height, colorSide, colorTop) {
-                for(let i=0; i<width*2.5; i++) {
+                width *= scale; height *= scale;
+                for(let i=0; i<width*2; i++) {
                     points.push({
                         x: centerX - (width/2) + Math.random()*width,
                         y: yBase - height + Math.random()*height,
                         color: colorSide
                     });
                 }
-                for(let i=0; i<width*0.8; i++) {
+                for(let i=0; i<width*0.6; i++) {
                     points.push({
                         x: centerX - (width/2) + Math.random()*width,
-                        y: yBase - height + Math.random()*10,
+                        y: yBase - height + Math.random()*8,
                         color: colorTop
                     });
                 }
             }
 
             addTier(centerY, 350, 80, '#e01e37', '#ff4d6d');
-            addTier(centerY - 80, 260, 70, '#c71f37', '#ff758f');
-            addTier(centerY - 150, 180, 60, '#a01a33', '#ffccd5');
+            addTier(centerY - (80*scale), 260, 70, '#c71f37', '#ff758f');
+            addTier(centerY - (150*scale), 180, 60, '#a01a33', '#ffccd5');
 
-            const candleCount = 15;
-            const startX = centerX - 70;
-            for(let i=0; i<candleCount; i++) {
-                const cX = startX + (i * 10);
-                const cY = centerY - 210;
-                for(let j=0; j<8; j++) points.push({ x: cX, y: cY - j*2, color: '#fbff12' });
-                for(let k=0; k<6; k++) points.push({ x: cX + (Math.random()-0.5)*3, y: cY - 20 - k, color: '#ff9f1c' });
-            }
             return points;
         }
 
@@ -432,7 +419,7 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
             document.getElementById('step2-3').classList.add('active');
             initCanvas();
             
-            const pts = getPointsFromText("CHÚC MỪNG SINH NHẬT");
+            const pts = getPointsFromText("HAPPY BIRTHDAY");
             particles = pts.map(p => new Particle(0, 0, p.x, p.y, '#ff4d6d'));
             animateParticles();
             
@@ -459,7 +446,7 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
                     }
                 });
                 document.getElementById('btn-to-4').style.display = 'block';
-            }, 3500);
+            }, 3000);
         }
 
         function animateParticles() {
@@ -476,14 +463,22 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
             cancelAnimationFrame(animationId);
             document.getElementById('step2-3').classList.remove('active');
             document.getElementById('step4').classList.add('active');
+            // Đặt vị trí ban đầu cho nút run
+            const btn = document.getElementById('btn-run');
+            btn.style.left = '50%';
+            btn.style.top = '60%';
+            btn.style.transform = 'translate(-50%, -50%)';
         }
 
-        function runAway() {
+        function runAway(e) {
+            if(e) e.preventDefault();
             const btn = document.getElementById('btn-run');
-            const x = Math.random() * (window.innerWidth - 150) + 75;
-            const y = Math.random() * (window.innerHeight - 80) + 40;
+            const padding = 60;
+            const x = Math.random() * (window.innerWidth - padding * 2) + padding;
+            const y = Math.random() * (window.innerHeight - padding * 2) + padding;
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
+            btn.style.transform = 'translate(-50%, -50%)';
         }
 
         function startStage5() {
@@ -493,20 +488,14 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
         }
 
         function celebrate() {
-            const count = 150;
-            const defaults = { origin: { y: 0.75 }, colors: ['#ff4d6d', '#ff758f', '#ffb703'] };
-
-            function fire(particleRatio, opts) {
-                confetti({ ...defaults, ...opts, particleCount: Math.floor(count * particleRatio) });
-            }
-
-            fire(0.25, { spread: 26, startVelocity: 45 });
-            fire(0.2, { spread: 60 });
-            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            const count = isMobile ? 80 : 150;
+            const defaults = { origin: { y: 0.8 }, colors: ['#ff4d6d', '#ff758f', '#ffb703'] };
+            confetti({ ...defaults, particleCount: count, spread: 70 });
         }
 
-        window.addEventListener('resize', initCanvas);
+        window.addEventListener('resize', () => {
+            initCanvas();
+        });
     </script>
 </body>
 </html>
