@@ -86,7 +86,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 15px;
             box-sizing: border-box;
         }
 
@@ -101,41 +101,39 @@
         }
 
         h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
             color: var(--text-dark);
             text-shadow: 2px 2px 8px rgba(255, 77, 109, 0.2);
         }
 
         p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            max-width: 600px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            max-width: 500px;
             color: var(--text-dark);
         }
 
         .btn {
-            padding: 14px 40px;
-            font-size: 1.1rem;
+            padding: 12px 30px;
+            font-size: 1rem;
             background: var(--primary);
             color: white;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-top: 30px;
+            margin-top: 20px;
             z-index: 100;
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
             font-family: 'Quicksand', sans-serif;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             background: var(--secondary);
-            box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6);
         }
 
         canvas {
@@ -153,35 +151,37 @@
         /* --- STYLES CHO TẤM THIỆP (CARD) --- */
         .birthday-card {
             background-color: #fff;
-            width: 90%;
-            max-width: 500px;
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(128, 15, 47, 0.2);
+            width: 95%;
+            max-width: 400px; /* Thu nhỏ chiều rộng tối đa */
+            max-height: 85vh; /* Đảm bảo không vượt quá màn hình */
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(128, 15, 47, 0.15);
             position: relative;
-            transform: translateY(30px);
+            transform: translateY(20px);
             opacity: 0;
             animation: slideUpCard 1s 0.5s forwards;
             background-image: radial-gradient(#ffccd5 1px, transparent 1px);
-            background-size: 20px 20px;
-            border: 5px solid #fff;
+            background-size: 15px 15px;
+            border: 4px solid #fff;
+            overflow-y: auto; /* Cho phép cuộn nếu nội dung quá dài trên màn hình cực nhỏ */
         }
 
         .birthday-card::after {
             content: '❤️';
             position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 40px;
+            top: -15px;
+            right: -15px;
+            font-size: 30px;
             transform: rotate(15deg);
         }
 
         .birthday-card::before {
             content: '';
             position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 2px dashed #ffb3c1;
-            border-radius: 20px;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1.5px dashed #ffb3c1;
+            border-radius: 15px;
             pointer-events: none;
         }
 
@@ -191,35 +191,40 @@
 
         .wish-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             color: #ff4d6d;
-            margin: 0 0 15px 0;
+            margin: 0 0 10px 0;
         }
 
         .wish-text {
             white-space: pre-line;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.5rem;
-            line-height: 1.6;
+            font-size: 1.3rem;
+            line-height: 1.4;
             color: #590d22;
             text-align: center;
         }
 
         .from-signature {
-            margin-top: 20px;
+            margin-top: 15px;
             text-align: right;
             font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #ff4d6d;
-            padding-right: 20px;
+            padding-right: 15px;
+            font-weight: bold;
+        }
+
+        /* Ẩn thanh cuộn nhưng vẫn cuộn được */
+        .birthday-card::-webkit-scrollbar {
+            display: none;
         }
 
         @media (max-width: 600px) {
-            .birthday-card { padding: 25px; }
+            .birthday-card { padding: 20px; width: 90%; }
             .wish-text { font-size: 1.2rem; }
-            .wish-title { font-size: 2rem; }
-            .from-signature { font-size: 1.5rem; }
-            h1 { font-size: 2.2rem; }
+            .wish-title { font-size: 1.8rem; }
+            h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -239,13 +244,13 @@
         <!-- Giai đoạn 2 & 3 -->
         <div id="step2-3" class="section">
             <canvas id="particleCanvas"></canvas>
-            <button id="btn-to-4" class="btn" style="display:none; position:relative; top: 260px;" onclick="startStage4()">Nhận điều bất ngờ ✨</button>
+            <button id="btn-to-4" class="btn" style="display:none; position:relative; top: 220px;" onclick="startStage4()">Nhận điều bất ngờ ✨</button>
         </div>
 
         <!-- Giai đoạn 4 -->
         <div id="step4" class="section">
             <h1>Thử thách bắt quà!</h1>
-            <p>Hãy nhanh tay chạm vào hộp quà đang trốn chạy nhé!</p>
+            <p>Phải nhanh tay chạm vào hộp quà đang trốn chạy nhé!</p>
             <button id="btn-run" class="btn" onmouseover="runAway()" onclick="startStage5()">🎁 Nhận Quà</button>
         </div>
 
@@ -269,19 +274,19 @@ Giữ nụ cười như vốn vẫn quen.
 Dẫu đời có đôi lần chênh vênh quá,
 Vẫn tin rằng ngày mai sẽ dịu hiền.
                 </div>
-                <div class="from-signature">From: Mt Võ Hồng Quyền with love ❤️</div>
-                <button class="btn" style="margin-top: 25px;" onclick="celebrate()">Thổi nến & Nhận pháo hoa! 🎉</button>
+                <div class="from-signature">From: Võ Hồng Quyền with love ❤️</div>
+                <button class="btn" style="margin-top: 15px; width: 100%;" onclick="celebrate()">Thổi nến & Nhận pháo hoa! 🎉</button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- Hiệu ứng Sao Băng & Bong Bóng ---
+        // --- Hiệu ứng Trang Trí ---
         function initDecorations() {
             const starContainer = document.getElementById('stars-container');
             const bubbleContainer = document.getElementById('bubbles-container');
             
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 12; i++) {
                 const star = document.createElement('div');
                 star.className = 'shooting-star';
                 star.style.left = Math.random() * 100 + 'vw';
@@ -290,15 +295,14 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
                 starContainer.appendChild(star);
             }
 
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 15; i++) {
                 const bubble = document.createElement('div');
                 bubble.className = 'bubble';
-                const size = Math.random() * 40 + 10 + 'px';
+                const size = Math.random() * 30 + 10 + 'px';
                 bubble.style.width = size;
                 bubble.style.height = size;
                 bubble.style.left = Math.random() * 100 + 'vw';
                 bubble.style.animationDuration = Math.random() * 5 + 5 + 's';
-                bubble.style.animationDelay = Math.random() * 5 + 's';
                 bubbleContainer.appendChild(bubble);
             }
         }
@@ -306,7 +310,7 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
 
         // --- Typing Effect ---
         const titleText = "Gửi cậu...";
-        const descText = "Tớ đã chuẩn bị một món quà đặc biệt dành riêng cho ngày hôm nay. Hãy cùng tớ khám phá bí mật này nhé!";
+        const descText = "Tớ đã chuẩn bị một món quà đặc biệt dành riêng cho ngày hôm nay. Hãy cùng khám phá bí mật này nhé!";
         let i = 0, j = 0;
 
         function typeTitle() {
@@ -323,7 +327,7 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
             if (j < descText.length) {
                 document.getElementById("mystery-desc").innerHTML += descText.charAt(j);
                 j++;
-                setTimeout(typeDesc, 50);
+                setTimeout(typeDesc, 40);
             }
         }
         window.onload = typeTitle;
@@ -348,15 +352,14 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
                 this.targetX = targetX;
                 this.targetY = targetY;
                 this.color = color;
-                this.size = Math.random() * 2 + 1.5;
+                this.size = Math.random() * 1.5 + 1.2;
                 this.baseSize = this.size;
                 this.velocity = 0.05;
                 this.offset = Math.random() * 100;
             }
             update() {
-                // Hiệu ứng thở (pulsing) khi ở chế độ bánh kem
                 if (isCakeMode) {
-                    const pulse = Math.sin(time + this.offset) * 0.5;
+                    const pulse = Math.sin(time + this.offset) * 0.4;
                     this.size = this.baseSize + pulse;
                 }
                 this.x += (this.targetX - this.x) * this.velocity;
@@ -373,7 +376,7 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
         function getPointsFromText(text) {
             ctx.clearRect(0,0, canvas.width, canvas.height);
             ctx.fillStyle = "black";
-            ctx.font = "bold 75px Quicksand";
+            ctx.font = "bold 50px Quicksand";
             ctx.textAlign = "center";
             ctx.fillText(text, canvas.width/2, canvas.height/2);
             
@@ -392,40 +395,36 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
         function getPointsFromCake() {
             const points = [];
             const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2 + 100;
+            const centerY = canvas.height / 2 + 80;
 
             function addTier(yBase, width, height, colorSide, colorTop) {
-                for(let i=0; i<width*3; i++) {
+                for(let i=0; i<width*2.5; i++) {
                     points.push({
                         x: centerX - (width/2) + Math.random()*width,
                         y: yBase - height + Math.random()*height,
                         color: colorSide
                     });
                 }
-                for(let i=0; i<width; i++) {
+                for(let i=0; i<width*0.8; i++) {
                     points.push({
                         x: centerX - (width/2) + Math.random()*width,
-                        y: yBase - height + Math.random()*12,
+                        y: yBase - height + Math.random()*10,
                         color: colorTop
                     });
                 }
             }
 
-            // Tầng bánh to và màu sắc rực rỡ hơn
-            addTier(centerY, 420, 100, '#e01e37', '#ff4d6d'); // Tầng 1
-            addTier(centerY - 100, 320, 85, '#c71f37', '#ff758f'); // Tầng 2
-            addTier(centerY - 185, 230, 75, '#a01a33', '#ffccd5'); // Tầng 3
+            addTier(centerY, 350, 80, '#e01e37', '#ff4d6d');
+            addTier(centerY - 80, 260, 70, '#c71f37', '#ff758f');
+            addTier(centerY - 150, 180, 60, '#a01a33', '#ffccd5');
 
-            // Thêm nến bập bùng
-            const candleCount = 20;
-            const startX = centerX - 100;
+            const candleCount = 15;
+            const startX = centerX - 70;
             for(let i=0; i<candleCount; i++) {
-                const cX = startX + (i * 10.5);
-                const cY = centerY - 260;
-                // Thân nến
-                for(let j=0; j<10; j++) points.push({ x: cX, y: cY - j*2, color: '#fbff12' });
-                // Ngọn lửa
-                for(let k=0; k<8; k++) points.push({ x: cX + (Math.random()-0.5)*4, y: cY - 25 - k, color: '#ff9f1c' });
+                const cX = startX + (i * 10);
+                const cY = centerY - 210;
+                for(let j=0; j<8; j++) points.push({ x: cX, y: cY - j*2, color: '#fbff12' });
+                for(let k=0; k<6; k++) points.push({ x: cX + (Math.random()-0.5)*3, y: cY - 20 - k, color: '#ff9f1c' });
             }
             return points;
         }
@@ -437,7 +436,6 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
             
             const pts = getPointsFromText("CHÚC MỪNG SINH NHẬT");
             particles = pts.map(p => new Particle(0, 0, p.x, p.y, '#ff4d6d'));
-            
             animateParticles();
             
             setTimeout(() => {
@@ -460,11 +458,10 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
                         p.targetX = target.x;
                         p.targetY = target.y;
                         p.color = target.color;
-                        p.velocity = 0.04 + Math.random() * 0.02;
                     }
                 });
                 document.getElementById('btn-to-4').style.display = 'block';
-            }, 4000);
+            }, 3500);
         }
 
         function animateParticles() {
@@ -485,8 +482,8 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
 
         function runAway() {
             const btn = document.getElementById('btn-run');
-            const x = Math.random() * (window.innerWidth - 200) + 100;
-            const y = Math.random() * (window.innerHeight - 100) + 50;
+            const x = Math.random() * (window.innerWidth - 150) + 75;
+            const y = Math.random() * (window.innerHeight - 80) + 40;
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
         }
@@ -498,18 +495,17 @@ Vẫn tin rằng ngày mai sẽ dịu hiền.
         }
 
         function celebrate() {
-            const count = 200;
-            const defaults = { origin: { y: 0.7 }, colors: ['#ff4d6d', '#ff758f', '#ffb703', '#ffffff'] };
+            const count = 150;
+            const defaults = { origin: { y: 0.75 }, colors: ['#ff4d6d', '#ff758f', '#ffb703'] };
 
             function fire(particleRatio, opts) {
                 confetti({ ...defaults, ...opts, particleCount: Math.floor(count * particleRatio) });
             }
 
-            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.25, { spread: 26, startVelocity: 45 });
             fire(0.2, { spread: 60 });
             fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
             fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-            fire(0.1, { spread: 120, startVelocity: 45 });
         }
 
         window.addEventListener('resize', initCanvas);
